@@ -2,10 +2,10 @@ name: Release Addon
 on:
   push:
     tags:
-      - 'v*' # Triggers on tags like v1.0, v1.1, etc.
+      - 'v*'
 
 permissions:
-    contents: write
+  contents: write
 
 jobs:
   release:
@@ -16,19 +16,9 @@ jobs:
         run: |
           zip -r owen-wilson-loot-${{ github.ref_name }}.zip . -x "*.git*"
       - name: Create GitHub Release
-        uses: actions/create-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        uses: softprops/action-gh-release@v1
         with:
           tag_name: ${{ github.ref_name }}
-          release_name: ${{ github.ref_name }}
+          name: ${{ github.ref_name }}
           body: "Release ${{ github.ref_name }} of Owen Wilson Loot"
-      - name: Upload Release Asset
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ steps.create-release.outputs.upload_url }}
-          asset_path: ./owen-wilson-loot-${{ github.ref_name }}.zip
-          asset_name: owen-wilson-loot-${{ github.ref_name }}.zip
-          asset_content_type: application/zip
+          files: owen-wilson-loot.zip
