@@ -1,0 +1,7 @@
+## Interface: 110100
+## Title: Owen Wilson Loot
+## Notes: Owen Wilson wow! Every time you loot!
+## Author: HallwayRaptor
+## Version: 1.0.1
+
+OwenWilsonLoot.lua
